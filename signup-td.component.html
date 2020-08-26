@@ -1,0 +1,103 @@
+<div class="row custom-row text-danger" style="margin-top: 30px;margin-left:250px;width:100%;">
+    <div class="col-sm-5 custom-container jumbotron">
+        <form class="form-horizontal" #signupform = "ngForm"
+         (ngSubmit) ="signupform.valid && signup(signupform)">
+            <fieldset>
+                <legend> Signup Form </legend>
+                    <div class="form-group"> 
+                        <label for="empname"> Employee Name: </label>
+                        <input type="text" id="empname" name="empname"
+                        placeholder="Enter Employee Fullname"
+                        [ngModel] = "employee.empname"
+                        required
+                        #empname = "ngModel"
+                        />
+                    </div>
+                    <div *ngIf = "empname.dirty || empname.touched">
+                        <div *ngIf = 'empname.errors?.required' class="alert alert-danger">
+                            Employee Name Can't be Empty
+                        </div>                    
+                    </div>
+                    <div class="form-group"> 
+                            <label for="emppassword"> Password </label>
+                            <input type="password" id="emppassword" name="emppassword"
+                            placeholder="Enter Password"
+                            [ngModel] = "employee.password.emppassword"
+                            required
+                            minlength="8"
+                            #emppassword="ngModel"
+                            />
+                    </div>
+
+                    <div class="form-group"> 
+                            <label for="emprpassword"> Retype Password </label>
+                            <input type="password" id="emprpassword"
+                             name="emprpassword"
+                            placeholder="Enter Password Again"
+                            [ngModel] = "employee.password.emprpassword"
+                            required
+                            #emprpassword="ngModel"
+                            />
+                    </div>
+                    <div *ngIf = "emppassword.touched &&
+                    (emppassword.invalid || 
+                    emprpassword.invalid ||
+                    emppassword.value != emprpassword.value)" 
+                    class = "alert alert-danger">
+                        <div *ngIf = "emppassword.invalid || emprpassword.invalid else nomatch">
+                            Password length can't be less then 8 characters
+                        </div>
+                    <ng-template #nomatch>
+                        password and confirm password not matching
+                    </ng-template>
+                    </div>
+                    
+                    <div class=  "form-group"> 
+                            <label for="empemail">Enter Email </label>
+                            <input type="text" id="empemail" name="empemail"
+                            placeholder="Enter Email"
+                            [ngModel] = "employee.empemail"
+                            required
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                            #empemail = "ngModel"
+                            />
+                    </div>
+                    <div *ngIf = "empemail.dirty || empemail.touched" class="alert alert-danger">
+                    <div *ngIf = "empemail.errors?.required && empemail.invalid">
+                        Email is Mandatory
+                    </div>
+                    <div *ngIf = "empemail.errors?.pattern">
+                        Email format is not correct
+                    </div>
+                </div>
+                    <div class="form-group"> 
+                            <label for="empdepartment"> Select Department</label>
+                        <select id="empdepartment" name="empdepartment"
+                        [ngModel] = "employee.empdepartment" required>
+                            <option *ngFor="let dept of departments" 
+                            [value]="dept"> {{dept}} </option>
+                        </select>    
+                        </div>
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" name="empsign"
+                                [ngModel] = "employee.empsign"
+                                required
+                                />
+                                I confirm that above information filled is correct to best of my knowledge
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button type="Reset" class="btn btn-danger"> Cancel </button>&nbsp;&nbsp;
+                            <button type="Submit" class="btn btn-primary" 
+                            [disabled]="!signupform.valid"> Signup </button>
+                            
+                        </div>
+            </fieldset>
+        </form>
+         <!-- {{signupform.value|json}} -->
+        <div *ngIf = "signupform.valid && signupform.submitted" class ="alert alert-danger">
+            Please correct all the required errors
+        </div>
+    </div>
+</div>

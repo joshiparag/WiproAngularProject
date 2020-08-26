@@ -1,0 +1,55 @@
+<div class="row custom-row text-danger" style="margin-top: 30px;margin-left:250px;width:100%;">
+    <div class="col-sm-5 custom-container jumbotron bg-dark">
+        <form class="form-horizontal">
+            <fieldset>
+                <legend> Signup Form </legend>
+                    <div class="form-group"> 
+                        <label for="empname"> Employee Name: </label>
+                        <input type="text" name="empname"
+                        placeholder="Enter Employee Fullname"
+                        />
+                    </div>
+                    <div class="form-group"> 
+                            <label for="emppassword"> Password </label>
+                            <input type="password" name="emppassword"
+                            placeholder="Enter Password"
+                            />
+                    </div>
+
+                    <div class="form-group"> 
+                            <label for="emprpassword"> Retype Password </label>
+                            <input type="password"
+                             name="emprpassword"
+                            placeholder="Enter Password Again"/>
+                    </div>
+                    
+                    
+                    <div class=  "form-group"> 
+                            <label for="empemail">Enter Email </label>
+                            <input type="text" name="empemail"
+                            placeholder="Enter Email"/>
+                    </div>
+                
+                    <div class="form-group"> 
+                            <label for="empdepartment"> Select Department</label>
+                        <select  name="empdepartment">
+                            <option *ngFor="let dept of departments" 
+                            [value]="dept"> {{dept}} </option>
+                        </select>    
+                        </div>
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" name="empsign"/>
+                                I confirm that above information filled is correct to best of my knowledge
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button type="Reset" class="btn btn-danger"> Cancel </button>&nbsp;&nbsp;
+                            <button type="Submit" class="btn btn-primary"> Signup </button>
+                            
+                        </div>
+            </fieldset>
+        </form>
+         
+    </div>
+</div>
